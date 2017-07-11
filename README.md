@@ -1,8 +1,7 @@
-# iota-seed-mnemonic
+# iota-seed-generator
 
-Diceware list
-https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases
+## Install
+`yarn install iota-seed-generator`
 
-http://world.std.com/~reinhold/diceware.html
-
+## Usage
 
