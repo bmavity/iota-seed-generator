@@ -16,25 +16,25 @@ module.exports = function getSeedGenerationCommand() {
 function createLinuxSeed() {
   // 'cat /dev/urandom |tr -dc A-Z9|head -c${1:-81}'
   return new Promise((resolve, reject) => {
-    const seed = spawn('head', ['-c', '${1:-81}'])
-    const alpha = spawn('tr', ['-dc', 'A-Z9'])
-    const rand = spawn('cat', ['/dev/urandom'])
-    
-    seed.stdout.on('data', (data) => {
-      resolve(data.toString().replace('\n', ''))
+    const seed = spawn('cat /dev/urandom |tr -dc A-Z9|head -c${1:-81}', {
+      shell: true
     })
     
-    seed.stderr.on('data', reject)
-    seed.on('error', reject)
+    seed.stdout.on('data', (data) => {
+      resolve(data.toString())
+    })
+    
+    seed.stderr.on('data', err => {
+      reject(err.toString())
+    })
+
+    seed.on('error', err => {
+      reject(err)
+    })
     
     seed.on('close', (code) => {
       seed.kill()
-      alpha.kill()
-      rand.kill()
     })
-  
-    rand.stdout.pipe(alpha.stdin)
-    alpha.stdout.pipe(seed.stdin)
   })
 }
 
