@@ -68,5 +68,21 @@ function createOsxSeed() {
 
 function createWindowsSeed() {
   // '-join ([char[]](65..90+57..57)*100 | Get-Random -Count 81)'
-  
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await exec('powershell.exe -Command "-join ([char[]](65..90+57..57)*100 | Get-Random -Count 81)"')
+
+      if(result.stdout) {
+        const textContainingSeed = result.stdout.replace('\r\n', '')
+        const textParts = textContainingSeed.split('\n')
+
+        resolve(textParts.pop())
+      } else {
+        reject(result.stderr)
+      }
+    }
+    catch (err) {
+      reject(err)
+    }
+  })
 }
