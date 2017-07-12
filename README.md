@@ -7,4 +7,19 @@
 `yarn install iota-seed-generator`
 
 ## Usage
+```javascript
+import generateSeed from '../'
 
+async function seed() {
+  try {
+    const seed = await generateSeed()
+    
+    // Use seed
+  }
+  catch (err) {
+    // Handle error
+  }
+}
+
+seed()
+```
