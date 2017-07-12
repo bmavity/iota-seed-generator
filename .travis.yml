@@ -1,11 +1,8 @@
 language: node_js
 
-matrix:
-  include:
-    - os: linux
-    - os: linux
-      dist: trusty
-    - os: osx
+os:
+  - linux
+  - osx
 
 node_js:
   - "node"
