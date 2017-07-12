@@ -8,6 +8,7 @@ describe('when generating an iota seed', () => {
   let seed
 
   beforeAll(async () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     seed = await generateSeed()
   })
 
@@ -15,7 +16,7 @@ describe('when generating an iota seed', () => {
     expect(seed.length).toEqual(81)
   })
 
-  it('should be a valid iota seed', () => {
+  it('should be all characters as trytes', () => {
     expect(iota.valid.isTrytes(seed)).toBeTruthy()
   })
 })

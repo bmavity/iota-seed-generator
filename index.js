@@ -1,5 +1,7 @@
 const util = require('util')
-const spawn = require('child_process').spawn
+const proc = require('child_process')
+const exec = util.promisify(proc.exec)
+const spawn = proc.spawn
 
 
 module.exports = function getSeedGenerationCommand() {
